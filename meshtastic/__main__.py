@@ -1215,6 +1215,11 @@ def export_config(interface) -> str:
         for pref in module_config:
             if len(module_config[pref]) > 0:
                 prefs[pref] = module_config[pref]
+            if pref == "servo_config":
+                if 'authorizedKey' in prefs[pref]:
+                    for i in range(len(prefs[pref]['authorizedKey'])):
+                        prefs[pref]['authorizedKey'][i] = 'base64:' + prefs[pref]['authorizedKey'][i]
+
         if mt_config.camel_case:
             configObj["module_config"] = prefs
         else:

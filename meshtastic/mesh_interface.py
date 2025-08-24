@@ -1447,6 +1447,10 @@ class MeshInterface:  # pylint: disable=R0902
                 self.localNode.moduleConfig.paxcounter.CopyFrom(
                     fromRadio.moduleConfig.paxcounter
                 )
+            elif fromRadio.moduleConfig.HasField("servo_control"):
+                self.localNode.moduleConfig.servo_control.CopyFrom(
+                    fromRadio.moduleConfig.servo_control
+                )
 
         else:
             logging.debug("Unexpected FromRadio payload")
