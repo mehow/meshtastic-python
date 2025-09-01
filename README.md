@@ -1,60 +1,46 @@
-<div align="center" markdown="1">
-
-<img src=".github/meshtastic_logo.png" alt="Meshtastic Logo" width="80"/>
-
-  <h1 align="center"> Meshtastic Python
-</h1>
-  <p style="font-size:15px;" align="center">A Python library and client for use with Meshtastic devices. </p>
-
-[![codecov](https://codecov.io/gh/meshtastic/python/branch/master/graph/badge.svg?token=TIWPJL73KV)](https://codecov.io/gh/meshtastic/python)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/meshtastic)
-[![CI](https://img.shields.io/github/actions/workflow/status/meshtastic/python/ci.yml?branch=master&label=actions&logo=github&color=yellow)](https://github.com/meshtastic/python/actions/workflows/ci.yml)
-[![CLA assistant](https://cla-assistant.io/readme/badge/meshtastic/python)](https://cla-assistant.io/meshtastic/python)
-[![Fiscal Contributors](https://opencollective.com/meshtastic/tiers/badge.svg?label=Fiscal%20Contributors&color=deeppink)](https://opencollective.com/meshtastic/)
-![GPL-3.0](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
-
-</div>
-
 <div align="center">
-	<a href="https://meshtastic.org/docs/software/python/cli/installation">Getting Started Guide</a>
-	-
-	<a href="https://python.meshtastic.org">API Documentation</a>
+
+<img src=".github/meshtastic_servo.png" alt="Meshtastic + Servo Logo" width="80"/>
+
+<h1>Meshtastic Python<br>with servo support</h1>
+<p style="font-size:15px;"></p>
+
 </div>
 
 ## Overview
 
-This small library (and example application) provides an easy API for sending and receiving messages over mesh radios.
-It also provides access to any of the operations/data available in the device user interface or the Android application.
-Events are delivered using a publish-subscribe model, and you can subscribe to only the message types you are interested in.
+This is a fork of the official Meshtastic Python library and client, adding support for configuration settings exposed by [my fork](https://github.com/mehow/meshtastic-firmware) of Meshtastic firmware.
 
-## Call for Contributors
+## Get Started
 
-This library and CLI has gone without a consistent maintainer for a while, and there's many improvements that could be made. We're all volunteers here and help is extremely appreciated, whether in implementing your own needs or helping maintain the library and CLI in general.
+To build the `meshtastic` binary, simply run:
 
-If you're interested in contributing but don't have specific things you'd like to work on, look at the roadmap below!
+```shell
+pip3 install poetry
+./bin/build-bin.sh
+```
 
-## Roadmap
+You will then find the binary in the `dist` folder.
 
-This should always be considered a list in progress and flux -- inclusion doesn't guarantee implementation, and exclusion doesn't mean something's not wanted. GitHub issues are a great place to discuss ideas.
+## Configuration
 
-* Types
-  * type annotations throughout the codebase, and upgrading mypy running in CI to `--strict`
-* async-friendliness
-* CLI completeness & consistency
-  * the CLI should support all features of the firmware
-  * there should be a consistent output format available for shell scripting
-* CLI input validation & documentation
-  * what arguments and options are compatible & incompatible with one another?
-  * can the options be restructured in a way that is more self-documenting?
-  * pubsub events should be documented clearly
-* helpers for third-party code
-  * it should be easy to write a script that supports similar options to the CLI so many tools support the same ways of connecting to nodes
-* data storage & processing
-  * there should be a standardized way of recording packets for later use, debugging, etc.
-  * a persistence layer could also keep track of nodes beyond nodedb, as the apps do
-  * a sqlite database schema and tools for writing to it may be a good starting point
-  * enable maps, charts, visualizations
+This fork adds support for the following settings: 
 
-## Stats
+- **servo_control.enabled** - true / false
+- **servo_control.gpio_pin** - GPIO pin the servo is connected to
+- **servo_control.open_position** - OPEN position 0-180°
+- **servo_control.closed_position** - CLOSED position 0-180°
+- **servo_control.authorized_key** - list of public keys of authorized nodes
 
-![Alt](https://repobeats.axiom.co/api/embed/c71ee8fc4a79690402e5d2807a41eec5e96d9039.svg "Repobeats analytics image")
+E.g. to configure a servo connected to pin 19 to move between 45° (OPEN) and 135° (CLOSED) when issued a command by a node with public key `c2Vydm8gYXV0aG9yaXplZCBNZXNodGFzdGljIG5vZGU=`, run:
+
+```shell
+meshtastic \
+  --set servo_control.enabled true \
+  --set servo_control.gpio_pin 19 \
+  --set servo_control.open_position 45 \
+  --set servo_control.closed_position 135 \
+  --set servo_control.authorized_key base64:c2Vydm8gYXV0aG9yaXplZCBNZXNodGFzdGljIG5vZGU=
+```
+
+You may add up to 3 authorized nodes.
