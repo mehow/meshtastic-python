@@ -1150,6 +1150,52 @@ class ModuleConfig(google.protobuf.message.Message):
         ) -> None: ...
         def ClearField(self, field_name: typing.Literal["blue", b"blue", "current", b"current", "green", b"green", "led_state", b"led_state", "red", b"red"]) -> None: ...
 
+    @typing.final
+    class ServoControlConfig(google.protobuf.message.Message):
+        """
+        ServoControlModule Config
+        """
+
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        ENABLED_FIELD_NUMBER: builtins.int
+        GPIO_PIN_FIELD_NUMBER: builtins.int
+        OPEN_POSITION_FIELD_NUMBER: builtins.int
+        CLOSED_POSITION_FIELD_NUMBER: builtins.int
+        AUTHORIZED_KEY_FIELD_NUMBER: builtins.int
+        enabled: builtins.bool
+        """
+        Whether the Module is enabled
+        """
+        gpio_pin: builtins.int
+        """
+        Servo pin number
+        """
+        open_position: builtins.int
+        """
+        Servo position in the opened state
+        """
+        closed_position: builtins.int
+        """
+        Servo position in the closed state
+        """
+        @property
+        def authorized_key(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.bytes]:
+            """
+            The public key authorized to control the servo.
+            """
+
+        def __init__(
+            self,
+            *,
+            enabled: builtins.bool = ...,
+            gpio_pin: builtins.int = ...,
+            open_position: builtins.int = ...,
+            closed_position: builtins.int = ...,
+            authorized_key: collections.abc.Iterable[builtins.bytes] | None = ...,
+        ) -> None: ...
+        def ClearField(self, field_name: typing.Literal["authorized_key", b"authorized_key", "closed_position", b"closed_position", "enabled", b"enabled", "gpio_pin", b"gpio_pin", "open_position", b"open_position"]) -> None: ...
+
     MQTT_FIELD_NUMBER: builtins.int
     SERIAL_FIELD_NUMBER: builtins.int
     EXTERNAL_NOTIFICATION_FIELD_NUMBER: builtins.int
@@ -1163,6 +1209,7 @@ class ModuleConfig(google.protobuf.message.Message):
     AMBIENT_LIGHTING_FIELD_NUMBER: builtins.int
     DETECTION_SENSOR_FIELD_NUMBER: builtins.int
     PAXCOUNTER_FIELD_NUMBER: builtins.int
+    SERVO_CONTROL_FIELD_NUMBER: builtins.int
     @property
     def mqtt(self) -> global___ModuleConfig.MQTTConfig:
         """
@@ -1241,6 +1288,12 @@ class ModuleConfig(google.protobuf.message.Message):
         TODO: REPLACE
         """
 
+    @property
+    def servo_control(self) -> global___ModuleConfig.ServoControlConfig:
+        """
+        TODO: REPLACE
+        """
+
     def __init__(
         self,
         *,
@@ -1257,10 +1310,11 @@ class ModuleConfig(google.protobuf.message.Message):
         ambient_lighting: global___ModuleConfig.AmbientLightingConfig | None = ...,
         detection_sensor: global___ModuleConfig.DetectionSensorConfig | None = ...,
         paxcounter: global___ModuleConfig.PaxcounterConfig | None = ...,
+        servo_control: global___ModuleConfig.ServoControlConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing.Literal["ambient_lighting", b"ambient_lighting", "audio", b"audio", "canned_message", b"canned_message", "detection_sensor", b"detection_sensor", "external_notification", b"external_notification", "mqtt", b"mqtt", "neighbor_info", b"neighbor_info", "paxcounter", b"paxcounter", "payload_variant", b"payload_variant", "range_test", b"range_test", "remote_hardware", b"remote_hardware", "serial", b"serial", "store_forward", b"store_forward", "telemetry", b"telemetry"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing.Literal["ambient_lighting", b"ambient_lighting", "audio", b"audio", "canned_message", b"canned_message", "detection_sensor", b"detection_sensor", "external_notification", b"external_notification", "mqtt", b"mqtt", "neighbor_info", b"neighbor_info", "paxcounter", b"paxcounter", "payload_variant", b"payload_variant", "range_test", b"range_test", "remote_hardware", b"remote_hardware", "serial", b"serial", "store_forward", b"store_forward", "telemetry", b"telemetry"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing.Literal["payload_variant", b"payload_variant"]) -> typing.Literal["mqtt", "serial", "external_notification", "store_forward", "range_test", "telemetry", "canned_message", "audio", "remote_hardware", "neighbor_info", "ambient_lighting", "detection_sensor", "paxcounter"] | None: ...
+    def HasField(self, field_name: typing.Literal["ambient_lighting", b"ambient_lighting", "audio", b"audio", "canned_message", b"canned_message", "detection_sensor", b"detection_sensor", "external_notification", b"external_notification", "mqtt", b"mqtt", "neighbor_info", b"neighbor_info", "paxcounter", b"paxcounter", "payload_variant", b"payload_variant", "range_test", b"range_test", "remote_hardware", b"remote_hardware", "serial", b"serial", "servo_control", b"servo_control", "store_forward", b"store_forward", "telemetry", b"telemetry"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing.Literal["ambient_lighting", b"ambient_lighting", "audio", b"audio", "canned_message", b"canned_message", "detection_sensor", b"detection_sensor", "external_notification", b"external_notification", "mqtt", b"mqtt", "neighbor_info", b"neighbor_info", "paxcounter", b"paxcounter", "payload_variant", b"payload_variant", "range_test", b"range_test", "remote_hardware", b"remote_hardware", "serial", b"serial", "servo_control", b"servo_control", "store_forward", b"store_forward", "telemetry", b"telemetry"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing.Literal["payload_variant", b"payload_variant"]) -> typing.Literal["mqtt", "serial", "external_notification", "store_forward", "range_test", "telemetry", "canned_message", "audio", "remote_hardware", "neighbor_info", "ambient_lighting", "detection_sensor", "paxcounter", "servo_control"] | None: ...
 
 global___ModuleConfig = ModuleConfig
 
