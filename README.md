@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src=".github/meshtastic_servo.png" alt="Meshtastic + Servo Logo" width="80"/>
-
 <h1>Meshtastic Python<br>with servo support</h1>
 <p style="font-size:15px;"></p>
 
