@@ -186,6 +186,10 @@ class AdminMessage(google.protobuf.message.Message):
         """
         TODO: REPLACE
         """
+        SERVO_CONTROL_CONFIG: AdminMessage._ModuleConfigType.ValueType  # 13
+        """
+        TODO: REPLACE
+        """
 
     class ModuleConfigType(_ModuleConfigType, metaclass=_ModuleConfigTypeEnumTypeWrapper):
         """
@@ -241,6 +245,10 @@ class AdminMessage(google.protobuf.message.Message):
     TODO: REPLACE
     """
     PAXCOUNTER_CONFIG: AdminMessage.ModuleConfigType.ValueType  # 12
+    """
+    TODO: REPLACE
+    """
+    SERVO_CONTROL_CONFIG: AdminMessage.ModuleConfigType.ValueType  # 13
     """
     TODO: REPLACE
     """
